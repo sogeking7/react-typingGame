@@ -1,12 +1,15 @@
 import React from "react";
-import './Counter.scss'
+import "./Counter.scss";
 
-function Counter({speed, start}) {
-  return <div>
-    <h1 className="text-white font-bold mx-auto"><span className=""></span>{speed} wpm</h1>
-    <h1 className="text-white font-bold mx-auto">Time: {start}</h1>
-  </div>
-  
+function Counter({ speed, start }) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-white font-bold">
+      {`Time: ${start}`}
+      </span>
+      <span className="text-white font-bold">{`${speed} wpm`}</span>
+    </div>
+  );
 }
 
 export default Counter;

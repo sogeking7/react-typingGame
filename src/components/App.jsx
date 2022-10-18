@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const data = {
-  text: `I know just how to whisper and I know just how to cry. I know just where to find the answers and I know just how to lie. I know just how to fake it and I know just how to scheme. I know just when to face the truth and then I know just when to dream.`,
+  text: `I know just how to whisper and I know just how to cry.`,
 };
 var l = 0;
 export default function App() {
@@ -18,38 +18,45 @@ export default function App() {
   const [warning, setWarning] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [start, setStart] = useState(0);
-
+ 
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(0);
+  const [timer, setTimer] = useState(0);
+ 
   function diff_minutes(dt2, dt1) {
     var diff = (dt1.getTime() - dt2.getTime()) / 1000;
-    return diff;
+    return diff / 60;
   }
 
   useEffect(() => {
-    if (!start) {
-      setStart(new Date());
-    }
+    var po = false;
     const cur = textArray[pointer];
     if (pointer + 1 == textArray.length && input == cur) {
       l += cur.length;
-      setInput("");
+      
+      setInput("", 5000);
+      po = true;
       setDone(1);
+      setSpeed(Math.round((l / 5) / diff_minutes(start, new Date)))
     } else if (input.length - 1 === cur.length && input.slice(0, -1) === cur) {
       l += cur.length;
       setInput("");
+      po = true;
       setPointer((p) => p + 1);
     }
     var flag = 0;
     for (var i = 0; i < input.length; i++) {
-      if (input[i] !== cur[i]) {
+      if (!start) {
+        setStart(new Date());
+      }
+      if (input[i] != cur[i]) {
+
         flag = 1;
-        setWarning(1);
         break;
       }
     }
-
-    if (!flag) {
-      setWarning(0);
-    }
+    if (po || done) flag = 0;
+    setWarning(flag);
   }, [input]);
 
   return (

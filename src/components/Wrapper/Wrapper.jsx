@@ -13,11 +13,11 @@ function Wrapper({
   pointer,
   textArray,
   warning,
-  done
+  done,
 }) {
   return (
     <div>
-      <Counter speed={speed} />
+      <Counter speed={speed} start={start} />
       <div
         id="wrapper"
         className="bg-zinc-800 text-white px-4 py-6 rounded-lg mx-auto"
@@ -31,8 +31,7 @@ function Wrapper({
                     {""}
                   </span>{" "}
                 </span>
-              ))  
-              
+              ))
             : text.map((word, index) => (
                 <span key={index}>
                   <span
@@ -43,8 +42,7 @@ function Wrapper({
                     {""}
                   </span>{" "}
                 </span>
-              ))
-              }
+              ))}
         </p>
 
         <input
