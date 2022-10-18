@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import Counter from "../Counter/Counter";
+import RaceLine from "../RaceLine/RaceLine";
 import "./Wrapper.scss";
 
 function Wrapper({
@@ -14,13 +15,14 @@ function Wrapper({
   textArray,
   warning,
   done,
+  move,
 }) {
   return (
-    <div>
-      <Counter speed={speed} start={start} />
+    <div id="wrapper" className="mx-auto">
+      <Counter speed={speed} start={start} move={move} />
       <div
         id="wrapper"
-        className="bg-zinc-800 text-white px-4 py-6 rounded-lg mx-auto"
+        className="bg-zinc-800 text-white px-5 py-6 rounded-lg mx-auto"
       >
         <p className="mb-7 text-xl leading-6 font-sans">
           {pointer + 1 == text.length && done

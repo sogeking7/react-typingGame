@@ -12,7 +12,7 @@ function ScoreBoard({lastRace}) {
 			<div className='text-white'>
 				<h1 className='text-base'>kaiyrkhan kairolla (kair011a_)</h1>
 				<div className='flex gap-2 text-sm'>
-					<h2 className='px-4 bg-orange-600	rounded-sm'>
+					<h2 className='px-4 bg-amber-600	rounded-sm'>
 						<span className='font-bold'>{`Best race: &{}WPM`}</span>
 					</h2>
 					<h2 className='font-bold px-4 bg-violet-600 rounded-sm'>
