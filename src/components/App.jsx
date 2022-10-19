@@ -8,8 +8,8 @@ import { useEffect } from "react";
 import RaceLine from "./RaceLine/RaceLine";
 
 const data = {
-  text: `If a man's wearing his pants on his head or if he says his words backwards from time to time, you know it's all laid out there for you. But if he's friendly to strangers and keeps his home spick-and-span, more often than not he's done something even his own ma couldn't forgive.`,
-
+  text: `a about all also and as at be because but by can come could day do even find first for from get give go have he her here him his how I if in into it its just know like look make man many me more my new no not now of on one only or other our out people say see she so some take tell than that the their them then there these they thing think this those time to two up use very want way we well what when which who will with would year you your`,
+  
 };
 var l = 0;
 export default function App() {
@@ -21,9 +21,9 @@ export default function App() {
   const [speed, setSpeed] = useState(0);
   const [start, setStart] = useState(0);
   
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
-  const [timer, setTimer] = useState(0);
+  // const [minute, setMinute] = useState(0);
+  // const [second, setSecond] = useState(0);
+  // const [timer, setTimer] = useState(0);
   const [move, setMove] = useState(0)
   
   console.log(move)
