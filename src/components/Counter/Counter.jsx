@@ -1,8 +1,8 @@
-import React from "react";
-import "./Counter.scss";
+import React, { useState } from "react";
 import car from "./../../img/car.svg";
+var cnt = 0;
+function Counter({ speed, start, move, minutes, seconds }) {
 
-function Counter({ speed, start, move }) {
   return (
     <div className="flex items-center mb-3">
       <div className="w-full relative">
@@ -19,6 +19,7 @@ function Counter({ speed, start, move }) {
         <hr className="border-dashed border-t-2 border-zinc-700 w-full" />
       </div>
       <div className="w-24">
+        <h1 className="text-white font-bold text-right">{`${minutes} : ${seconds}`}</h1>
         {speed > 0 && (
           <h1 className="text-white w-full text-right text-xs">Done!</h1>
         )}
