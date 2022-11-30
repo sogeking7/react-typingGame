@@ -8,13 +8,17 @@ export default function Main({
   red,
   race,
   setRace,
+  colorMode,
   restart,
 }) {
+  const colorTxt = useColorModeValue("#84cc16", "#84cc16");
+  const bgCursor = useColorModeValue('black', 'white')
   return (
     <Box
       maxW="800px"
       className="mx-auto"
-      bgColor={useColorModeValue("white", "black")}
+      bgColor={useColorModeValue("#eff6ff", "black")}
+      borderWidth={colorMode === 'dark' ? '0px' : '1px'}
       p="1.5rem"
       borderRadius="lg"
     >
@@ -23,12 +27,16 @@ export default function Main({
           {text.map((word, id) => {
             if (id < index) {
               return (
-                <pre
+                <Text
                   key={id}
-                  className="text-lime-500 inline-block relative bottom-0 left-0 "
+                  display='inline'
+                  position='relative'
+                  bottom='0'
+                  right='0'
+                  color={colorTxt}
                 >
                   {word}
-                </pre>
+                </Text>
               );
             } else if (id === index) {
               var k = -1;
@@ -40,12 +48,14 @@ export default function Main({
               const p2 = word.slice(k + 1, input.length);
               const p3 = word.slice(input.length, word.length);
               return (
-                <h1 key={id} className="relative inline-block ">
-                  <span className="text-lime-500">{p1}</span>
+                <Text key={id} position='relative' display='inline-block'>
+                  <Text color={colorTxt} display='inline'>
+                    {p1}
+                  </Text>
                   <span className="text-black bg-red-300">{p2}</span>
-                  <span className="w-[.1px] h-[23px] absolute top-[0px] bg-white inline-block"></span>
-                  <pre className="text-white inline-block">{p3}</pre>
-                </h1>
+                  <Box w='.1px' h='23px' position='absolute' top='0' display='inline-block' bgColor={bgCursor}></Box>
+                  <pre className="inline-block">{p3}</pre>
+                </Text>
               );
             } else {
               return <pre className="inline-block">{word}</pre>;
