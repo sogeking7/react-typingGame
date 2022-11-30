@@ -1,29 +1,13 @@
-import React from 'react'
-import head from '../../img/head.svg'
+import { Flex, Box, Icon } from "@chakra-ui/react";
+import { IconUser } from "@tabler/icons";
 
-function ScoreBoard({lastRace}) {
-	
-	return (
-		<div className='flex'>
-			<div className='mr-3 w-11 h-11 bg-violet-600 flex items-center justify-center rounded-md'>
-				<img style={{transform: "rotateX(180)"}} src={head} alt="head" />
-			</div>
-			<div className='text-white'>
-				<h1 className='text-base'>kaiyrkhan kairolla (kair011a_)</h1>
-				<div className='flex gap-2 text-sm'>
-					<h2 className='px-4 bg-amber-600	rounded-sm'>
-						<span className='font-bold'>{`Best race: &{}WPM`}</span>
-					</h2>
-					<h2 className='font-bold px-4 bg-violet-600 rounded-sm'>
-						79 WPM
-					</h2>
-					<h2 className='px-4 bg-violet-600	rounded-sm'>
-						<span className='font-bold'>365&nbsp;</span>Races
-					</h2>
-				</div>
-			</div>
-		</div>
-	)
+export default function ScoreBoard() {
+  return (
+		<Flex>
+			<Icon fontSize='2rem' w='40px' h='40px' mr='.5rem'>
+				<IconUser />
+			</Icon>
+			<h1>User </h1>
+		</Flex>
+	);
 }
-
-export default ScoreBoard

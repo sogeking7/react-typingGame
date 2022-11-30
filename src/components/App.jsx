@@ -1,60 +1,65 @@
-import NavBar from "./NavBar/NavBar";
-import Wrapper from "./Wrapper/Wrapper";
-import Footer from "./Footer/Footer";
-import Title from "./Title/Title";
+import NavBar from "./NavBar";
+import Main from "./Main";
+import { useTimer } from "react-timer-hook";
 import { useState, useEffect } from "react";
+import { Box, Container } from "@chakra-ui/react";
+import RaceLine from "./RaceLine/RaceLine";
 
 const data = {
-  text: `I can't believe the things I see. The path that I have chosen now has led me to a wall, and with each passing day I feel a little more like something dear was lost.`,  
+  text: `Sometimes you never feel meaner than the moment you stop being mean. It's like how turning on a light makes you realize how dark the room had gotten. And the way you usually act, the things you would have normally done, are like these ghosts that everyone can see but pretends not to.`,
 };
-
 var textList = data.text.split(" ");
-for (var i = 0; i < textList.length; i++) {
+for (var i = 0; i < textList.length - 1; i++) {
   textList[i] += " ";
 }
-console.log(textList)
+textList.push(" ");
+
+console.log(textList);
 export default function App() {
   const [input, setInput] = useState("");
-  const [pointer, setPointer] = useState(0)
-  const [index, setIndex] = useState(0)
-  const [start, setStart] = useState(0)
-  const [red, setRed] = useState(0)
+  const [pointer, setPointer] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [race, setRace] = useState(0);
+  const [red, setRed] = useState(0);
+  const { seconds, minutes, restart, pause } = useTimer(0);
+
   useEffect(() => {
-    if (!start) {
-      setStart((new Date).getTime())
-    }
-     console.log(index, pointer, input, start)
     if (input.length <= textList[index].length) {
-      if (input[input.length-1] == textList[index][input.length-1]) {
+      if (input[input.length - 1] === textList[index][input.length - 1]) {
         setRed(0);
-        setPointer(input.length)
+        setPointer(input.length);
         if (input === textList[index]) {
-          setIndex(p=>p+1)
-          setInput("")
+          setInput("");
+          setIndex((p) => p + 1);
+          if (index + 1 === textList.length-1) {
+            setRace(180 - (60 * minutes + seconds));
+            pause();
+            return;
+          }
         }
       } else {
         setRed(1);
       }
-    } 
+    }
   }, [input]);
 
   return (
-    <div>
+    <Box>
       <NavBar />
-      
-      <div className="container mx-auto pt-10">
-        <Title />
-        <Wrapper
+      <RaceLine minutes={minutes} seconds={seconds} />
+      <Container px="1rem" maxW="1440px">
+        <Main
           red={red}
           input={input}
           setInput={setInput}
           text={textList}
           pointer={pointer}
           index={index}
+          restart={restart}
+          race={race}
+          setRace={setRace}
         />
-      </div>
-
-      <Footer />
-    </div>
+      </Container>
+    </Box>
   );
 }
