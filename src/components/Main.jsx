@@ -4,7 +4,6 @@ import {
   Container,
   Text,
   Input,
-  Heading,
 } from "@chakra-ui/react";
 
 export default function Main({
@@ -18,21 +17,23 @@ export default function Main({
   colorMode,
   restart,
 }) {
-  const colorTxt = useColorModeValue("#84cc16", "#84cc16");
-  const bgCursor = useColorModeValue("black", "white");
+  const colorTxt = useColorModeValue("#79D70F", "#79D70F");
+  const bgCursor = useColorModeValue("second_black", "white");
+  const dmColor = useColorModeValue("second_black", "white");
   const dmBorder = useColorModeValue('blackAlpha.400', "whiteAlpha.400");
   return (
     <Container
       maxW="800px"
       borderColor={dmBorder}
       className="mx-auto"
-      bgColor={useColorModeValue("#f6fbff", "black")} //#f6fbff
-      borderWidth={colorMode === "dark" ? "1px" : "1px"}
+      bgColor={useColorModeValue("white", "black")} //#f6fbff
      
-      p="1.5rem"
+     
+      py="1.5rem"
+      px='1rem'
       borderRadius="lg"
     >
-      <Text lineHeight="1.7rem" fontSize="1.2rem" mb="1rem" position="relative">
+      <Text lineHeight="1.7rem" fontSize="20px" mb="1rem" position="relative">
         <p className="relative">
           {text.map((word, id) => {
             if (id < index) {
@@ -79,21 +80,20 @@ export default function Main({
                   >
                     {p1}
                   </Text>
-                  <span className="text-black bg-red-300">
+                  <Text color="second_black" bgColor='red.300' display='inline-block'>
                     <span className="underline">{p2}</span>
-                    {flag ? " " : ""}
-                  </span>
+                    {!!flag && <pre className="inline-block"> </pre>}
+                  </Text>
                   <Box
                     w=".1px"
                     h="23px"
                     position="absolute"
-                    top="0"
+                    top="2px"
                     display="inline-block"
                     bgColor={bgCursor}
                   ></Box>
                   <pre className="inline-block underline">{p3}</pre>
-                  {!flag && <pre className="inline-block"> </pre>
-                  }
+                  {!flag && <pre className="inline-block"> </pre>}
                 </Text>
               );
             } else {

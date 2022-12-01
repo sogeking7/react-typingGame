@@ -1,13 +1,22 @@
-import { Flex, Box, Text, Icon, Button} from "@chakra-ui/react";
+import { Text, Icon, Button, useColorModeValue } from "@chakra-ui/react";
 import { IconUser } from "@tabler/icons";
 
 export default function ScoreBoard() {
+  const dmColor = useColorModeValue("second_black", "white");
+
   return (
-		<Button variant='outline' fontSize='.7rem' alignItems='center'>
-			<Icon  w='20px' h='20px' mr='.5rem'>
-				<IconUser />
-			</Icon>
-			<Text>User</Text>
-		</Button>
-	);
+    <Button
+      variant="link"
+      size="xl"
+      alignItems="center"
+      mr="1rem"
+			color={dmColor}
+      _hover={{ textDecoration: "underline", textDecorationThickness: "2px" }}
+    >
+      <Icon w="24px" h="24px" mr=".2rem">
+        <IconUser />
+      </Icon>
+      <Text>User</Text>
+    </Button>
+  );
 }

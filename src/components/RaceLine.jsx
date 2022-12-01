@@ -13,7 +13,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
   }, [seconds]);
 
   return (
-    <Box mb="1rem" h="40px">
+    <Box mb=".5rem" h="25px">
       <Container
         h="25px"
         display="flex"
@@ -38,7 +38,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
             top="-5px"
           >
             User <br></br>
-            You
+            (you)
           </Box>
           <Image src={carImg} alt="car" h="100%" />
         </Flex>
