@@ -4,6 +4,7 @@ import {
   Container,
   Text,
   Input,
+  Heading,
 } from "@chakra-ui/react";
 
 export default function Main({
@@ -17,17 +18,17 @@ export default function Main({
   colorMode,
   restart,
 }) {
-
   const colorTxt = useColorModeValue("#84cc16", "#84cc16");
   const bgCursor = useColorModeValue("black", "white");
-
+  const dmBorder = useColorModeValue('blackAlpha.400', "whiteAlpha.400");
   return (
     <Container
       maxW="800px"
+      borderColor={dmBorder}
       className="mx-auto"
-      bgColor={useColorModeValue("#f0f9ff", "black")}
-      borderWidth={colorMode === "dark" ? "0px" : "1px"}
-      borderColor="blackAlpha.300"
+      bgColor={useColorModeValue("#f6fbff", "black")} //#f6fbff
+      borderWidth={colorMode === "dark" ? "1px" : "1px"}
+     
       p="1.5rem"
       borderRadius="lg"
     >
@@ -53,15 +54,35 @@ export default function Main({
                 if (input[i] === word[i]) k = i;
                 else break;
               }
-              const p1 = word.slice(0, k + 1);
-              const p2 = word.slice(k + 1, input.length);
-              const p3 = word.slice(input.length, word.length);
+              var p1 = word.slice(0, k + 1);
+              var p2 = word.slice(k + 1, input.length);
+              var p3 = word.slice(input.length, word.length);
+              if (index !== text.length - 2)
+                p3 = word.slice(input.length, word.length - 1);
+              var temp2 = "",
+                flag = 0;
+              for (let i = 0; i < p2.length; i++) {
+                if (p2[i] !== " ") temp2 += p2[i];
+                else flag = 1;
+              }
+              p2 = temp2;
+              console.log(p2 + "$", p3 + "$");
+              if (input.length === word.length)
+                if (input === word) p1 = word.slice(0, k);
               return (
-                <Text key={id} position="relative" display="inline-block">
-                  <Text color={colorTxt} display="inline">
+                <Text key={id} position="relative" display="inline-block" textDecorationThickness='2px' >
+                  <Text
+                    color={colorTxt}
+                    display="inline"
+                    textDecoration="underline"
+                    textDecorationThickness='2px'
+                  >
                     {p1}
                   </Text>
-                  <span className="text-black bg-red-300">{p2}</span>
+                  <span className="text-black bg-red-300">
+                    <span className="underline">{p2}</span>
+                    {flag ? " " : ""}
+                  </span>
                   <Box
                     w=".1px"
                     h="23px"
@@ -70,7 +91,9 @@ export default function Main({
                     display="inline-block"
                     bgColor={bgCursor}
                   ></Box>
-                  <pre className="inline-block">{p3}</pre>
+                  <pre className="inline-block underline">{p3}</pre>
+                  {!flag && <pre className="inline-block"> </pre>
+                  }
                 </Text>
               );
             } else {
@@ -81,16 +104,16 @@ export default function Main({
       </Text>
 
       <Input
-        autoFocus='autoFocus'
+        variant='outline'
+        autoFocus="autoFocus"
         fontSize="1.2rem"
         bgColor={red ? "red.300" : ""}
         color={red ? "black" : ""}
         type="text"
         value={input}
-        spellCheck="false"
+        spellCheck="true"
         placeholder="Type the above text here when the race begins"
         onChange={(i) => {
-          
           if (!race) {
             const time = new Date();
             setRace(1);

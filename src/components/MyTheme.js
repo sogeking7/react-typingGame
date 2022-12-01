@@ -3,7 +3,7 @@ export const MyTheme = extendTheme({
 	colors: {
 		white: '#fff',
 		second_white: '#e4e4e4',
-		black: "#121212",
+		black: "#121212", //121212
 		second_black: "#292929",
 		yellow: '#FFC54D',
 		teal_100: '#AEFEFF',

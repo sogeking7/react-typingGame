@@ -13,10 +13,8 @@ import RaceLine from "./RaceLine";
 import { IconMoonStars, IconSunHigh } from "@tabler/icons";
 
 const data = {
-  text: `That was what I wanted, but I don't need it to be gone. I can love you and I can love life and bear the pain all at the same time. I think the pain might even make the rest better, the way a good setting can make a diamond look better.`,
-  length: 0,
+  text: `If you have to choose among an infinite number of ways to put it together then the relation of the machine to you, and the relation of the machine and you to the rest of the world, has to be considered, because the selection from among many choices, the art of the work is just as dependent upon your own mind and spirit as it is upon the material of the machine.`,
 };
-data.length = data.text.length;
 var textList = data.text.split(" ");
 for (var i = 0; i < textList.length - 1; i++) {
   textList[i] += " ";
@@ -62,11 +60,13 @@ export default function App() {
   return (
     <Box bgColor={useColorModeValue("white", "black")} h="100vh" p="1rem">
       <NavBar />
+      <Container maxW="800px" p="0" mb='2rem' fontSize="1rem">
       <IconButton
         variant="outline"
         icon={colorMode === "dark" ? <IconSunHigh /> : <IconMoonStars />}
         onClick={toggleColorMode}
       />
+      </Container>
       <Container maxW="800px" p="0" mb="5rem" fontSize="1rem">
         <Box>
           <span>{minutes}</span>:<span>{seconds}</span>
