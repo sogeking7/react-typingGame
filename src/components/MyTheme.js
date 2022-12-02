@@ -3,7 +3,8 @@ export const MyTheme = extendTheme({
 	colors: {
 		white: '#f5f5f5',
 		second_white: '#e4e4e4',
-		black: "#121212", //121212
+		night_white: '#939eae',
+		black: "#161b22", //121212
 		second_black: "#1a202c",
 		yellow: '#FFC54D',
 		teal_100: '#AEFEFF',
@@ -25,6 +26,6 @@ export const MyTheme = extendTheme({
 	},
 	fonts: {
 		heading: 'Montserrat',
-		body: 'Monospace'
+		body: `Monospace`
 	}
 })

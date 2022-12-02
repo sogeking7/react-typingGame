@@ -18,7 +18,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
         h="25px"
         display="flex"
         maxW="800px"
-        p="0"
+        px="1rem"
         gap="1rem"
         fontSize="1.2rem"
         position="relative"
@@ -48,7 +48,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
           borderBottomStyle="dashed"
           borderBottomColor={colorMode === "dark" ? "white" : "black"}
         ></Box>
-        <Box fontSize="1rem" w="70px">
+        <Box fontSize="1rem" w="80px" fontWeight='bold' textAlign='start'>
           {wpm} wpm
         </Box>
       </Container>

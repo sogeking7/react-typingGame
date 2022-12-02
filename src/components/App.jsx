@@ -9,6 +9,8 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import RaceLine from "./RaceLine";
+import { MainContext, MyContext } from "../Context/Context";
+import Footer from "./Footer";
 
 const data = {
   text: `If you have to choose among an infinite number of ways to put it together then the relation of the machine to you, and the relation of the machine and you to the rest of the world, has to be considered, because the selection from among many choices, the art of the work is just as dependent upon your own mind and spirit as it is upon the material of the machine.`,
@@ -33,7 +35,7 @@ export default function App() {
   const [car, setCar] = useState(0);
   const [wpm, setWpm] = useState(0);
   const { seconds, minutes, restart, pause } = useTimer(0);
-  const { colorMode, toggleColorMode } = useColorMode("");
+  const { colorMode, toggleColorMode } = useColorMode("light");
 
   useEffect(() => {
     if (input.length <= textList[index].length) {
@@ -44,7 +46,7 @@ export default function App() {
         if (input === textList[index]) {
           setLength((p) => p + input.length);
           setInput("");
-          setCar((p) => p + 580 / (textList.length - 1));
+          setCar((p) => p + 565 / (textList.length - 1));
           if (index + 1 === textList.length - 1) {
             setIndex((p) => p + 1);
             pause();
@@ -59,41 +61,47 @@ export default function App() {
   }, [input, index, length, pause, red]);
 
   return (
-    <Box bgColor={useColorModeValue("white", "black")}>
-      <NavBar />
-      <Box
-        h="100vh"
-        p="1rem"
-        color={dmColor}
-      >
-        <Container maxW="800px" p="0" mb="5rem" fontSize="1rem">
-          <Box>
-            <span>{minutes}</span>:<span>{seconds < 10 ? '0' : ''}{seconds}</span>
-          </Box>
-        </Container>
-        <RaceLine
-          length={length}
-          wpm={wpm}
-          cur={cur}
-          setWpm={setWpm}
-          minutes={minutes}
-          seconds={seconds}
-          colorMode={colorMode}
-          car={car}
-        />
-        <Main
-          colorMode={colorMode}
-          red={red}
-          input={input}
-          setInput={setInput}
-          text={textList}
-          pointer={pointer}
-          index={index}
-          restart={restart}
-          race={race}
-          setRace={setRace}
-        />
+    <MyContext.Provider value={{ colorMode, toggleColorMode }}>
+      <Box bgColor={useColorModeValue("white", "black")} h='100vh' display='flex'  flexDirection='column' justifyContent='space-between'>
+        <NavBar />
+        <Box px="2rem" color={dmColor}>
+          <Container maxW="800px" mb="2rem" fontSize="1rem">
+            <Box fontWeight='bold'>
+              <span>{minutes}</span>:
+              <span>
+                {seconds < 10 ? "0" : ""}
+                {seconds}
+              </span>
+            </Box>
+          </Container>
+          <RaceLine
+            length={length}
+            wpm={wpm}
+            cur={cur}
+            setWpm={setWpm}
+            minutes={minutes}
+            seconds={seconds}
+            colorMode={colorMode}
+            car={car}
+          />
+          <MainContext.Provider
+            value={{
+              input,
+              setInput,
+              race,
+              setRace,
+              red,
+              index,
+              restart,
+              pointer,
+              textList,
+            }}
+          >
+            <Main />
+          </MainContext.Provider>
+        </Box>
+        <Footer />
       </Box>
-    </Box>
+    </MyContext.Provider>
   );
 }

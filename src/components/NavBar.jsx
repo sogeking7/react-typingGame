@@ -1,46 +1,46 @@
 import {
   Icon,
   Box,
-  Link,
   Container,
   Flex,
   Heading,
   IconButton,
-  useColorMode,
+  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { IconMoonStars, IconSunHigh, IconKeyboard } from "@tabler/icons";
-import ScoreBoard from "./ScoreBoard/ScoreBoard";
+import { IconKeyboard, IconUserCircle } from "@tabler/icons";
+import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
+import {BsGithub} from 'react-icons/bs'
 
 export default function NavBar() {
-  const bg = useColorModeValue("white", "black");
-  const dmColor = useColorModeValue("black", "white");
-  const { colorMode, toggleColorMode } = useColorMode("");
+  const dmColor = useColorModeValue("second_black", "white");
   return (
-    <Box bgColor={bg} mb="2rem" p="1rem" borderBottomColor="blackAlpha.200" borderBottomWidth='1px'>
+    <Box p="2rem">
       <Container
         maxW="800px"
         display="flex"
         p="0"
         justifyContent="space-between"
       >
-        <Flex alignItems="center" gap=".5rem">
-          <a href="/">
-            <Heading>Typeracer</Heading>
-          </a>
-          <Icon fontSize="40px">
+        <Button variant="ghost" gap=".5rem" size='lg' fontSize='20px' px='1rem'>
+          typeracer 
+          <Icon fontSize="20px">
             <IconKeyboard />
           </Icon>
-        </Flex>
-        <Flex alignItems="center">
-          <ScoreBoard />
+        </Button>
+        <Flex alignItems="center" gap=".5rem">
           <IconButton
-            variant="link"
-            size="xl"
+            size="sm"
+            variant="ghost"
+            mr='.5rem'
             color={dmColor}
-            icon={colorMode === "dark" ? <IconSunHigh /> : <IconMoonStars />}
-            onClick={toggleColorMode}
+            icon={
+              <Icon fontSize="20px">
+                <IconUserCircle />
+              </Icon>
+            }
           />
+          
         </Flex>
       </Container>
     </Box>

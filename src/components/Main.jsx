@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Box,
   useColorModeValue,
@@ -5,37 +6,32 @@ import {
   Text,
   Input,
 } from "@chakra-ui/react";
+import { MainContext } from "../Context/Context";
 
-export default function Main({
-  input,
-  setInput,
-  text,
-  index,
-  red,
-  race,
-  setRace,
-  colorMode,
-  restart,
-}) {
-  const colorTxt = useColorModeValue("#79D70F", "#79D70F");
+export default function Main() {
+  const { input, setInput, race, red, setRace, index, restart, textList } =
+    useContext(MainContext);
+  
+  const colorTxt = useColorModeValue("#000", "#fff");
+  const dmColor = useColorModeValue("night_white", "night_white");
+  const dmInput = useColorModeValue("black", "white");
+
   const bgCursor = useColorModeValue("second_black", "white");
-  const dmColor = useColorModeValue("second_black", "white");
-  const dmBorder = useColorModeValue('blackAlpha.400', "whiteAlpha.400");
+  const dmBorder = useColorModeValue("blackAlpha.400", "whiteAlpha.400");
   return (
     <Container
       maxW="800px"
       borderColor={dmBorder}
       className="mx-auto"
       bgColor={useColorModeValue("white", "black")} //#f6fbff
-     
-     
+      color={dmColor}
       py="1.5rem"
-      px='1rem'
+      px="1rem"
       borderRadius="lg"
     >
-      <Text lineHeight="1.7rem" fontSize="20px" mb="1rem" position="relative">
+      <Text lineHeight="1.7rem" fontSize="20px" mb="2rem" position="relative">
         <p className="relative">
-          {text.map((word, id) => {
+          {textList.map((word, id) => {
             if (id < index) {
               return (
                 <Text
@@ -58,7 +54,7 @@ export default function Main({
               var p1 = word.slice(0, k + 1);
               var p2 = word.slice(k + 1, input.length);
               var p3 = word.slice(input.length, word.length);
-              if (index !== text.length - 2)
+              if (index !== textList.length - 2)
                 p3 = word.slice(input.length, word.length - 1);
               var temp2 = "",
                 flag = 0;
@@ -71,16 +67,25 @@ export default function Main({
               if (input.length === word.length)
                 if (input === word) p1 = word.slice(0, k);
               return (
-                <Text key={id} position="relative" display="inline-block" textDecorationThickness='2px' >
+                <Text
+                  key={id}
+                  position="relative"
+                  display="inline-block"
+                  textDecorationThickness="2px"
+                >
                   <Text
                     color={colorTxt}
                     display="inline"
                     textDecoration="underline"
-                    textDecorationThickness='2px'
+                    textDecorationThickness="2px"
                   >
                     {p1}
                   </Text>
-                  <Text color="second_black" bgColor='red.300' display='inline-block'>
+                  <Text
+                    color="second_black"
+                    bgColor="red.300"
+                    display="inline-block"
+                  >
                     <span className="underline">{p2}</span>
                     {!!flag && <pre className="inline-block"> </pre>}
                   </Text>
@@ -104,7 +109,7 @@ export default function Main({
       </Text>
 
       <Input
-        variant='outline'
+        variant="outline"
         autoFocus="autoFocus"
         fontSize="1.2rem"
         bgColor={red ? "red.300" : ""}
