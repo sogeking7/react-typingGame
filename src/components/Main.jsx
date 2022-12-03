@@ -1,133 +1,89 @@
-import { useContext } from "react";
-import {
-  Box,
-  useColorModeValue,
-  Container,
-  Text,
-  Input,
-} from "@chakra-ui/react";
-import { MainContext } from "../Context/Context";
+import { useState } from "react";
 
-export default function Main() {
-  const { input, setInput, race, red, setRace, index, restart, textList } =
-    useContext(MainContext);
-  
-  const colorTxt = useColorModeValue("#000", "#fff");
-  const dmColor = useColorModeValue("night_white", "night_white");
-  const dmInput = useColorModeValue("black", "white");
+import { Container, Text, Input } from "@chakra-ui/react";
 
-  const bgCursor = useColorModeValue("second_black", "white");
-  const dmBorder = useColorModeValue("blackAlpha.400", "whiteAlpha.400");
+import { data } from "../data/data";
+
+const text = data.text;
+let textArr = text.split(" ");
+for (let i = 0; i < textArr.length - 1; i++) {
+  textArr[i] += " ";
+}
+
+function Main() {
+  const [input, setInput] = useState("");
+  const [pointer, setPointer] = useState(0);
+
+  const curWord = textArr[pointer];
+  let k = 0;
+  for (; k < input.length; k++) if (input[k] !== curWord[k]) break;
+
+  let prev = "";
+  for (let i = 0; i < pointer; i++) {
+    prev += textArr[i];
+  }
+
+  const p1 = curWord.slice(0, k);
+  const p2 = curWord.slice(k, input.length);
+  const p3 = curWord.slice(input.length, curWord.length);
+
+  let en = input.length - curWord.length;
+  let enext = "";
+
+  let next = "";
+  for (let i = pointer + 1; i < textArr.length; i++) {
+    if (en > 0) {
+      const d = textArr[i].length - en;
+      if (d <= 0) {
+        en -= textArr[i].length;
+        enext += textArr[i];
+      } else {
+        enext += textArr[i].slice(0, en);
+        next += textArr[i].slice(en, textArr[i].length);
+        en = 0;
+      }
+      continue;
+    }
+    next += textArr[i];
+  }
+
+  if (!p2 && !p3) {
+    setInput("");
+    setPointer((prev) => prev + 1);
+  }
+
   return (
-    <Container
-      maxW="800px"
-      borderColor={dmBorder}
-      className="mx-auto"
-      bgColor={useColorModeValue("white", "black")} //#f6fbff
-      color={dmColor}
-      py="1.5rem"
-      px="1rem"
-      borderRadius="lg"
-    >
-      <Text lineHeight="1.7rem" fontSize="20px" mb="2rem" position="relative">
-        <p className="relative">
-          {textList.map((word, id) => {
-            if (id < index) {
-              return (
-                <Text
-                  key={id}
-                  display="inline"
-                  position="relative"
-                  bottom="0"
-                  right="0"
-                  color={colorTxt}
-                >
-                  {word}
-                </Text>
-              );
-            } else if (id === index) {
-              var k = -1;
-              for (var i = 0; i < input.length; i++) {
-                if (input[i] === word[i]) k = i;
-                else break;
-              }
-              var p1 = word.slice(0, k + 1);
-              var p2 = word.slice(k + 1, input.length);
-              var p3 = word.slice(input.length, word.length);
-              if (index !== textList.length - 2)
-                p3 = word.slice(input.length, word.length - 1);
-              var temp2 = "",
-                flag = 0;
-              for (let i = 0; i < p2.length; i++) {
-                if (p2[i] !== " ") temp2 += p2[i];
-                else flag = 1;
-              }
-              p2 = temp2;
-              console.log(p2 + "$", p3 + "$");
-              if (input.length === word.length)
-                if (input === word) p1 = word.slice(0, k);
-              return (
-                <Text
-                  key={id}
-                  position="relative"
-                  display="inline-block"
-                  textDecorationThickness="2px"
-                >
-                  <Text
-                    color={colorTxt}
-                    display="inline"
-                    textDecoration="underline"
-                    textDecorationThickness="2px"
-                  >
-                    {p1}
-                  </Text>
-                  <Text
-                    color="second_black"
-                    bgColor="red.300"
-                    display="inline-block"
-                  >
-                    <span className="underline">{p2}</span>
-                    {!!flag && <pre className="inline-block"> </pre>}
-                  </Text>
-                  <Box
-                    w=".1px"
-                    h="23px"
-                    position="absolute"
-                    top="2px"
-                    display="inline-block"
-                    bgColor={bgCursor}
-                  ></Box>
-                  <pre className="inline-block underline">{p3}</pre>
-                  {!flag && <pre className="inline-block"> </pre>}
-                </Text>
-              );
-            } else {
-              return <pre className="inline-block">{word}</pre>;
-            }
-          })}
-        </p>
+    <Container maxW="800px" px="1rem">
+      <Text display="inline-block" mb="2rem">
+        <Text
+          lineHeight="1.7rem"
+          display="inline-block"
+          fontSize="20px"
+          color="green.400"
+        >
+          <span className="text-green-500">{prev}</span>
+
+          <span className="text-green-500">{p1}</span>
+          <span className="text-black bg-red-500">{p2}</span>
+          <span className="text-black">{p3}</span>
+          <span className="text-black bg-red-500">{enext}</span>
+          <span className="text-black">{next}</span>
+        </Text>
       </Text>
 
       <Input
         variant="outline"
         autoFocus="autoFocus"
-        fontSize="1.2rem"
-        bgColor={red ? "red.300" : ""}
-        color={red ? "black" : ""}
-        type="text"
+        fontSize="20px"
         value={input}
-        spellCheck="true"
-        placeholder="Type the above text here when the race begins"
+        bgColor={p2 || enext ? "red.500" : ""}
+        placeholder="Type the above text"
         onChange={(i) => {
-          if (!race) {
-            const time = new Date();
-            setRace(1);
-            time.setSeconds(time.getSeconds() + 180);
-            restart(time);
-          }
           setInput(i.target.value);
         }}
       />
     </Container>
   );
 }
+
+export default Main;

@@ -10,7 +10,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
   useEffect(() => {
     const s = 180 - (60 * minutes + seconds);
     setWpm(Math.round(cur / 5 / (s / 60)));
-  }, [seconds]);
+  }, [seconds, minutes]);
 
   return (
     <Box mb=".5rem" h="25px">
@@ -26,7 +26,7 @@ function RaceLine({ wpm, cur, setWpm, seconds, minutes, colorMode, car }) {
         <Flex
           position="absolute"
           h="30px"
-          top="-15px"
+          top="-10px"
           gap=".5rem"
           left={car + "px"}
         >

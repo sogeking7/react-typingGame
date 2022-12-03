@@ -2,37 +2,45 @@ import {
   Icon,
   Box,
   Container,
+  Link,
   Flex,
   Heading,
   IconButton,
+  Text,
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IconKeyboard, IconUserCircle } from "@tabler/icons";
 import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
-import {BsGithub} from 'react-icons/bs'
+import { BsGithub } from "react-icons/bs";
 
 export default function NavBar() {
-  const dmColor = useColorModeValue("second_black", "white");
+  const dmButton = useColorModeValue("", "#44475a");
+  const dmColor = useColorModeValue("second_black", "#bd93f9");
   return (
     <Box p="2rem">
       <Container
         maxW="800px"
         display="flex"
         p="0"
+        pl='1rem'
         justifyContent="space-between"
       >
-        <Button variant="ghost" gap=".5rem" size='lg' fontSize='20px' px='1rem'>
-          typeracer 
-          <Icon fontSize="20px">
-            <IconKeyboard />
-          </Icon>
-        </Button>
+        <Flex gap=".5rem" alignItems="center">
+          <a href="/" >
+            <Heading fontSize="1.5rem">typeracer</Heading>
+          </a>
+          <Link href="/">
+            <Icon fontSize="20px">
+              <IconKeyboard />
+            </Icon>
+          </Link>
+        </Flex>
         <Flex alignItems="center" gap=".5rem">
           <IconButton
             size="sm"
-            variant="ghost"
-            mr='.5rem'
+            variant="link"
+            mr=".5rem"
             color={dmColor}
             icon={
               <Icon fontSize="20px">
@@ -40,7 +48,6 @@ export default function NavBar() {
               </Icon>
             }
           />
-          
         </Flex>
       </Container>
     </Box>

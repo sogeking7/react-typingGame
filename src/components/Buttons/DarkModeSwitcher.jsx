@@ -5,7 +5,7 @@ import { MyContext } from "../../Context/Context";
 
 function DarkModeSwitcher() {
   const { colorMode, toggleColorMode } = useContext(MyContext);
-  const dmColor = useColorModeValue("black", "white");
+  const dmColor = useColorModeValue("black", "#bd93f9");
   return (
     <Button variant='link' fontSize='12px' fontWeight='thin' onClick={toggleColorMode} color={dmColor} gap='.2rem'>
 			{colorMode === 'dark' ?

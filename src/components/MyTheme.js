@@ -1,10 +1,12 @@
 import { extendTheme } from "@chakra-ui/react";
+import "@fontsource/roboto-mono"
+
 export const MyTheme = extendTheme({
 	colors: {
-		white: '#f5f5f5',
+		white: '#f8f8f2',
 		second_white: '#e4e4e4',
 		night_white: '#939eae',
-		black: "#161b22", //121212
+		black: "#282a36", //121212
 		second_black: "#1a202c",
 		yellow: '#FFC54D',
 		teal_100: '#AEFEFF',
@@ -26,6 +28,6 @@ export const MyTheme = extendTheme({
 	},
 	fonts: {
 		heading: 'Montserrat',
-		body: `Monospace`
+		body: `Roboto mono`
 	}
 })

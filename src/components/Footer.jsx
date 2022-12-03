@@ -5,7 +5,7 @@ import React from 'react'
 import {IconMail, IconBrandGithub} from '@tabler/icons'
 import DarkModeSwitcher from './Buttons/DarkModeSwitcher'
 function Footer() {
-  const dmColor = useColorModeValue("black", "white");
+  const dmColor = useColorModeValue("black", "#bd93f9");
 	return (
 		<Box w='100%' p='2rem' fontSize='12px'>
 			<Container maxW='800px' display='flex' justifyContent='space-between' >
