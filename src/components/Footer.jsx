@@ -1,30 +1,59 @@
-import { Box, Container,useColorModeValue, Button, Icon, Flex, Text} from '@chakra-ui/react'
-import React from 'react'
+import {
+  Box,
+  Container,
+  useColorModeValue,
+  Button,
+  Icon,
+  Flex,
+  Link,
+} from "@chakra-ui/react";
 
+import { IconMail, IconBrandGithub } from "@tabler/icons";
 
-import {IconMail, IconBrandGithub} from '@tabler/icons'
-import DarkModeSwitcher from './Buttons/DarkModeSwitcher'
+import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
+import Fonts from "./Fonts";
+
 function Footer() {
-  const dmColor = useColorModeValue("black", "#bd93f9");
-	return (
-		<Box w='100%' p='2rem' fontSize='12px'>
-			<Container maxW='800px' display='flex' justifyContent='space-between' >
-				<Flex gap='1rem'>
-					<Button variant='link' fontSize='12px' fontWeight='thin' gap='.2rem' color={dmColor}>
-						<Icon><IconMail/></Icon>
-						Contact
-					</Button>
-					<Button variant='link' fontSize='12px' fontWeight='thin' gap='.2rem' color={dmColor}>
-						<Icon><IconBrandGithub /></Icon>
-						Github
-					</Button>
-				</Flex>
-				<Flex>
-					<DarkModeSwitcher />
-				</Flex>
-			</Container>
-		</Box>
-	)
+  const background = useColorModeValue("primary_color", "primary_text");
+
+  return (
+    <Box
+      w="100%"
+      pt="2rem"
+      px="2rem"
+      pb="4rem"
+      bgColor={background}
+      zIndex="10"
+      position="absolute"
+      bottom="0"
+    >
+      <Container
+        maxW="container.xl"
+        p="0"
+        fontFamily="sans-serif"
+        display="flex"
+        justifyContent="space-between"
+      >
+        <Flex gap="1rem" color="text_icons">
+          <Link href="#" display="flex" alignItems="center" gap=".2rem">
+            <Icon>
+              <IconMail />
+            </Icon>
+            Contact
+          </Link>
+          <Link href="#" display="flex" alignItems="center" gap=".2rem">
+            <Icon>
+              <IconBrandGithub />
+            </Icon>
+            Github
+          </Link>
+        </Flex>
+        <Flex>
+          <DarkModeSwitcher />
+        </Flex>
+      </Container>
+    </Box>
+  );
 }
 
-export default Footer
+export default Footer;
