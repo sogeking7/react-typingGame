@@ -25,7 +25,9 @@ function Main() {
   const [index, setIndex] = useState(0);
   const [length, setLength] = useState(0);
   const [pointer, setPointer] = useState(0);
-  const [redList, setRedList] = useState([ ...Array(text.length).keys() ].map( i => i));
+  
+  const [redList, setRedList] = useState([]);
+  const [greenList, setGreenList] = useState([]);
   
   
   const {start, setStart, restart, pause, cur, setCur, seconds, minutes, setWpm, setCar, setAccuracy} = useContext(MyContext);
@@ -38,16 +40,23 @@ function Main() {
   const e2 = curString.slice((input.length>=curString.length ? input.length-k-1 : input.length-k), (input.length>=curString.length ? input.length-k : input.length-k));
   const e3 = text.slice(length + curString.length, length + curString.length + k);
 
+  if (input && text[curIndex] === input.slice(-1) && pointer + 1 === input.length) {
+    console.log(curIndex)
+    const tr = greenList.indexOf(curIndex);
+    const tl = redList.indexOf(curIndex);
+    if (tr === -1 && tl === -1) {
+      setGreenList([...greenList, curIndex]);
+    }
+    setAccuracy(greenList.length + 1)
+  }
   if (input && text[curIndex] !== input.slice(-1) && pointer + 1 === input.length) {
     console.log(curIndex)
-    const tr = redList.indexOf(curIndex);
-    if (tr !== -1) {
-      redList.splice(tr, 1);
-      setRedList(redList);
-      setAccuracy(redList.length - 1)
+    const tr = greenList.indexOf(curIndex);
+    const tl = redList.indexOf(curIndex);
+    if (tr === -1 && tl === -1) {
+      setRedList([...redList, curIndex]);
     }
   }
-  
 
   if (input && input.slice(-1) === curString[pointer] && input.length === pointer + 1) {
     setPointer(prev => prev + 1)

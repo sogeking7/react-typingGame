@@ -45,7 +45,7 @@ function RaceResults() {
               bgColor="text_icons"
               color="accent_color"
               h="30px"
-							strokeWidth='3'
+              strokeWidth="3"
             />
             <Text display="inline" color="light_primary_color">
               Your speed:
@@ -60,7 +60,7 @@ function RaceResults() {
               bgColor="text_icons"
               color="accent_color"
               h="30px"
-							strokeWidth='3'
+              strokeWidth="3"
             />
             <Text display="inline" color="light_primary_color">
               Time:
@@ -75,7 +75,7 @@ function RaceResults() {
               bgColor="text_icons"
               color="accent_color"
               h="30px"
-							strokeWidth='3'
+              strokeWidth="3"
             />
             <Text display="inline" color="light_primary_color">
               Accuracy:
@@ -88,12 +88,11 @@ function RaceResults() {
             {Math.floor(Seconds / 60)}:{Seconds % 60 < 10 ? "0" : ""}
             {Seconds % 60}
           </ListItem>
-          <ListItem>{
-						parseFloat((((accuracy) * 100) / length)).toFixed(1) 
-					}%</ListItem>
+          <ListItem>
+            {parseFloat((accuracy * 100) / length).toFixed(1)}%
+          </ListItem>
         </List>
       </Flex>
-			
     </Box>
   );
 }

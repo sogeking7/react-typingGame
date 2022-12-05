@@ -19,16 +19,11 @@ export const MyTheme = extendTheme({
     amber: "#FFC107",
   },
   breakpoints: {
-    basic: "1rem",
-    mob1: "600px",
-    mob2: "460px",
-    mob3: "320px",
-
-    md: "760px",
-    fl: "1280px",
-    lg: "62em",
-    xl: "80em",
-    "2xl": "96em",
+    sm: "320px",
+    md: "768px",
+    lg: "960px",
+    xl: "1200px",
+    "2xl": "1536px",
   },
   fonts: {
     heading: "Roboto mono",

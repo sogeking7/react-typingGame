@@ -8,7 +8,6 @@ import {
   useColorMode,
   Container,
   useColorModeValue,
-  Flex,
 } from "@chakra-ui/react";
 
 import NavBar from "./Header";
@@ -28,7 +27,7 @@ function App() {
   const [car, setCar] = useState(0);
   const [cur, setCur] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
-  
+
   const { colorMode, toggleColorMode } = useColorMode("light");
 
   useEffect(() => {
@@ -53,16 +52,16 @@ function App() {
         pause,
         setStart,
         restart,
-        accuracy, 
-        setAccuracy
+        accuracy,
+        setAccuracy,
       }}
     >
-      <Box bgColor={backgroundColor} position="relative">
+      <Box bgColor={backgroundColor} position="relative" overflow="hidden">
         <NavBar />
         <Container maxW="container.xl" flexDirection="column" py="4rem">
           <Box
             borderWidth="thin"
-            maxW="900px"
+            maxW={{ sm: "700px", xl: "900px" }}
             margin="0 auto"
             px="1rem"
             py="2rem"
@@ -72,7 +71,7 @@ function App() {
             <Container maxW="container.lg" p="0">
               <RaceLine />
               <Main />
-              <RaceResults />
+              {start === -1 && <RaceResults />}
             </Container>
           </Box>
         </Container>

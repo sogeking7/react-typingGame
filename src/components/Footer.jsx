@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   useColorModeValue,
-  Button,
   Icon,
   Flex,
   Link,
@@ -11,7 +10,6 @@ import {
 import { IconMail, IconBrandGithub } from "@tabler/icons";
 
 import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
-import Fonts from "./Fonts";
 
 function Footer() {
   const background = useColorModeValue("dark_primary_color", "primary_text");
