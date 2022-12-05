@@ -14,7 +14,7 @@ import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
 import Fonts from "./Fonts";
 
 function Footer() {
-  const background = useColorModeValue("primary_color", "primary_text");
+  const background = useColorModeValue("dark_primary_color", "primary_text");
 
   return (
     <Box
@@ -24,8 +24,6 @@ function Footer() {
       pb="4rem"
       bgColor={background}
       zIndex="10"
-      position="absolute"
-      bottom="0"
     >
       <Container
         maxW="container.xl"

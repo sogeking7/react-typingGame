@@ -15,6 +15,7 @@ import NavBar from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import RaceLine from "./RaceLine";
+import RaceResults from "./RaceResults";
 
 function App() {
   const backgroundColor = useColorModeValue("white", "black");
@@ -26,7 +27,8 @@ function App() {
   const [start, setStart] = useState(false); // not started = 0, started = 1, finished = -1
   const [car, setCar] = useState(0);
   const [cur, setCur] = useState(0);
-
+  const [accuracy, setAccuracy] = useState(0);
+  
   const { colorMode, toggleColorMode } = useColorMode("light");
 
   useEffect(() => {
@@ -51,9 +53,11 @@ function App() {
         pause,
         setStart,
         restart,
+        accuracy, 
+        setAccuracy
       }}
     >
-      <Box h="100vh" bgColor={backgroundColor} position="relative">
+      <Box bgColor={backgroundColor} position="relative">
         <NavBar />
         <Container maxW="container.xl" flexDirection="column" py="4rem">
           <Box
@@ -65,8 +69,11 @@ function App() {
             bgColor={wrapperBgColor}
             borderRadius="md"
           >
-            <RaceLine />
-            <Main />
+            <Container maxW="container.lg" p="0">
+              <RaceLine />
+              <Main />
+              <RaceResults />
+            </Container>
           </Box>
         </Container>
         <Footer />

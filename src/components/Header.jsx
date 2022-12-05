@@ -10,7 +10,7 @@ import {
 import { IconKeyboard, IconUserCircle } from "@tabler/icons";
 
 export default function NavBar() {
-  const background = useColorModeValue("primary_color", "primary_text");
+  const background = useColorModeValue("dark_primary_color", "primary_text");
 
   return (
     <Box
