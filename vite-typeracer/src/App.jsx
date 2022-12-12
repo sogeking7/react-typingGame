@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { MyContext } from "./components/Context/Context";
-import Test from "./components/Test";
+
 import {
   Box,
   useColorMode,
@@ -10,24 +9,22 @@ import {
 
 import NavBar from "./components/Header";
 import Main from "./components/Main/Main";
-import Footer from "./components/Footer";
 
 function App() {
-  const backgroundColor = useColorModeValue("white", "black");
+  const backgroundColor = useColorModeValue("white", "blackAlpha.800");
   const { colorMode, toggleColorMode } = useColorMode("light");
-  
   return (
-    <MyContext.Provider value={{colorMode, toggleColorMode}}>
-      <Box bgColor={backgroundColor} position="relative" overflow="hidden">
+    <MyContext.Provider value={{ colorMode, toggleColorMode }}>
+      <Box
+        bgColor={backgroundColor}
+        position="relative"
+        overflow="hidden"
+        h="100vh"
+      >
         <NavBar />
-        <Container maxW="container.xl" h="130vh" pt="2rem">
+        <Container maxW="container.xl" pt="2rem">
           <Main />
-          <Test>
-            This is children props
-          </Test>
-          <Box>text</Box>
         </Container>
-        <Footer />
       </Box>
     </MyContext.Provider>
   );

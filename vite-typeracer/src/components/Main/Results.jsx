@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { IconCheck, IconKeyboard, IconClockHour9 } from "@tabler/icons";
 
-function Results({ stopwatch, wpm, accuracy}) {
-  const backgroundColor = useColorModeValue("dark_primary_color", "primary_text"),
-        bgHeading = useColorModeValue("dark_primary_color", "text_wrapper_dark");
+function Results({ stopwatch, wpm, accuracy }) {
+  const backgroundColor = useColorModeValue("", "whiteAlpha.100"),
+    bgHeading = useColorModeValue("blackAlpha.50", "whiteAlpha.200 ");
 
   return (
     <Box
@@ -20,6 +20,7 @@ function Results({ stopwatch, wpm, accuracy}) {
       bgColor={backgroundColor}
       borderRadius="xl"
       color="text_icons"
+      borderWidth="thin"
     >
       <Heading
         fontSize="20px"
@@ -37,8 +38,8 @@ function Results({ stopwatch, wpm, accuracy}) {
               w="30px"
               p=".3rem"
               borderRadius="full"
-              bgColor="text_icons"
-              color="accent_color"
+              bgColor="white"
+              color="telegram.500"
               h="30px"
               strokeWidth="3"
             />
@@ -52,8 +53,8 @@ function Results({ stopwatch, wpm, accuracy}) {
               w="30px"
               p=".3rem"
               borderRadius="full"
-              bgColor="text_icons"
-              color="accent_color"
+              bgColor="white"
+              color="telegram.500"
               h="30px"
               strokeWidth="3"
             />
@@ -67,8 +68,8 @@ function Results({ stopwatch, wpm, accuracy}) {
               w="30px"
               p=".3rem"
               borderRadius="full"
-              bgColor="text_icons"
-              color="accent_color"
+              bgColor="white"
+              color="telegram.500"
               h="30px"
               strokeWidth="3"
             />
@@ -79,9 +80,7 @@ function Results({ stopwatch, wpm, accuracy}) {
         </List>
         <List listStyleType="none" spacing="5" w="200px" fontWeight="bold">
           <ListItem>{wpm} wpm</ListItem>
-          <ListItem>
-            {stopwatch}
-          </ListItem>
+          <ListItem>{stopwatch}</ListItem>
           <ListItem>{accuracy}%</ListItem>
         </List>
       </Flex>

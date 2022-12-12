@@ -1,44 +1,39 @@
 import {
-  Icon,
   Box,
   Container,
-  Link,
   Flex,
-  Heading,
+  IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { IconKeyboard, IconUserCircle } from "@tabler/icons";
+
+import { HamburgerIcon } from "@chakra-ui/icons";
+
+import DarkModeSwitcher from "./Buttons/DarkModeSwitcher";
 
 export default function NavBar() {
-  const background = useColorModeValue("dark_primary_color", "primary_text");
+  const background = useColorModeValue("", "primary_text");
+  const textColor = useColorModeValue("black", "white");
 
   return (
     <Box
-      p='1rem'
+      px="1rem"
+      py=".5rem"
       bgColor={background}
       color="text_icons"
       fontFamily="sans-serif"
+      borderBottomWidth="thin"
     >
       <Container
         maxW="container.xl"
         display="flex"
         p="0"
-        justifyContent="space-between"
+        color={textColor}
+        justifyContent="flex-end"
+        alignItems="center"
       >
-        <Flex gap=".5rem" alignItems="center">
-          <a href="/">
-            <Heading fontSize="1.5rem">typeracer</Heading>
-          </a>
-          <Link href="/">
-            <Icon fontSize="20px">
-              <IconKeyboard />
-            </Icon>
-          </Link>
-        </Flex>
-        <Flex alignItems="center" gap=".5rem">
-          <Icon fontSize="20px">
-            <IconUserCircle />
-          </Icon>
+        <Flex>
+          <IconButton variant="ghost" icon={<HamburgerIcon />} />
+          <DarkModeSwitcher />
         </Flex>
       </Container>
     </Box>

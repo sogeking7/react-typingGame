@@ -1,8 +1,8 @@
 import { Box, Flex, Image, useColorModeValue } from "@chakra-ui/react";
-import carImg from '../../img/car.svg'
+import carImg from "../../img/car.svg";
 
-function RaceLine({timer, wpm, car, start}) {
-  const dashedLineColor = useColorModeValue("amber", "white");
+function RaceLine({ timer, wpm, car, start }) {
+  const dashedLineColor = useColorModeValue("orange.300", "whiteAlpha.400");
 
   return (
     <Box maxW="container.lg" margin="0 auto 1rem auto" fontFamily="sans-serif">
