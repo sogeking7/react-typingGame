@@ -214,10 +214,11 @@ function Main() {
         </Box>
       )}
       <Flex mb="1rem" justifyContent="flex-end">
-        <Button colorScheme="green">
-          <a href="/">New race</a>
-        </Button>
+        <a href="/">
+          <Button colorScheme="green">New race</Button>
+        </a>
       </Flex>
+
       {start === -1 && (
         <Results stopwatch={stopwatch} wpm={wpm} accuracy={accuracy} />
       )}

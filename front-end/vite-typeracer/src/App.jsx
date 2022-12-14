@@ -7,8 +7,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import NavBar from "./components/Header";
+import NavBar from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const backgroundColor = useColorModeValue("white", "blackAlpha.800");
@@ -20,13 +21,14 @@ function App() {
         bgColor={backgroundColor}
         position="relative"
         overflow="hidden"
-        h="100vh"
+        h="110vh"
       >
         <NavBar />
 
         <Container maxW="container.xl" pt="2rem">
           <Main />
         </Container>
+        <Footer/>
       </Box>
     </MyContext.Provider>
   );
