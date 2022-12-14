@@ -13,7 +13,6 @@ import RaceLine from "./RaceLine";
 import Results from "./Results";
 
 import { data } from "../../data/data";
-import Btn from "../Buttons/Button";
 const text = data.text,
   textArr = text.split(" ");
 
@@ -35,6 +34,7 @@ function Main() {
     [timeElapsed, setTimeElapsed] = useState(180),
     [timerInterval, setTimerInterval] = useState(null);
 
+
   const startTimer = () =>
       setTimerInterval(setInterval(() => setTimeElapsed((p) => p - 1), 1000)),
     stopTimer = () => clearInterval(timerInterval);
@@ -47,7 +47,6 @@ function Main() {
   const curString = textArr[index] + " ",
     curIndex = length + input.length - 1,
     k = input.length > curString.length ? input.length - curString.length : 0,
-    car = (index * 630) / (textArr.length - 1),
     accuracy = parseFloat(
       100 - (redList.length * 100) / (text.length - 1)
     ).toFixed(1),
@@ -81,7 +80,6 @@ function Main() {
     if (index === textArr.length - 2 && pointer === curString.length - 2) {
       setInput("");
       setLength((prev) => prev + curString.length);
-      console.log(car);
       setIndex((prev) => prev + 1);
       setStart(-1);
       return stopTimer();
@@ -89,7 +87,6 @@ function Main() {
     if (input.slice(-1) === " ") {
       setInput("");
       setPointer(0);
-      console.log(car);
       setLength((prev) => prev + curString.length);
       setIndex((prev) => prev + 1);
     }
@@ -106,8 +103,9 @@ function Main() {
       py="2rem"
       bgColor={wrapperBgColor}
       borderRadius="md"
+      overflowX='hidden'
     >
-      <RaceLine timer={timer} wpm={wpm} car={car} start={start} />
+      <RaceLine timer={timer} wpm={wpm} start={start} index={index} textLength = {textArr.length-1}/>
       {start !== -1 && (
         <Box
           borderWidth="thin"

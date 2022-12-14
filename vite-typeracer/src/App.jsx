@@ -13,6 +13,7 @@ import Main from "./components/Main/Main";
 function App() {
   const backgroundColor = useColorModeValue("white", "blackAlpha.800");
   const { colorMode, toggleColorMode } = useColorMode("light");
+
   return (
     <MyContext.Provider value={{ colorMode, toggleColorMode }}>
       <Box
