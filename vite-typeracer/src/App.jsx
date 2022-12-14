@@ -23,6 +23,7 @@ function App() {
         h="100vh"
       >
         <NavBar />
+
         <Container maxW="container.xl" pt="2rem">
           <Main />
         </Container>

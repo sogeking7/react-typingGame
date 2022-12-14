@@ -7,16 +7,27 @@ import {
   Text,
   useColorModeValue,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 
+import axios from "axios";
 import RaceLine from "./RaceLine";
 import Results from "./Results";
 
-import { data } from "../../data/data";
-const text = data.text,
-  textArr = text.split(" ");
-
 function Main() {
+  const [data, setData] = useState(["a", "b", "c", "d"]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/data").then((response) => {
+      {
+        setData(response.data);
+      }
+    });
+  }, []);
+
+  const text = data[2] + " ";
+  const textArr = text.split(" ");
+
   const wrapperBgColor = useColorModeValue("white", "whiteAlpha.100"),
     backgroundColor = useColorModeValue("#f6fbff", "whiteAlpha.200"),
     inputBgColor = useColorModeValue("white", "blackAlpha.500"),
@@ -33,7 +44,6 @@ function Main() {
     [greenList, setGreenList] = useState([]),
     [timeElapsed, setTimeElapsed] = useState(180),
     [timerInterval, setTimerInterval] = useState(null);
-
 
   const startTimer = () =>
       setTimerInterval(setInterval(() => setTimeElapsed((p) => p - 1), 1000)),
@@ -103,9 +113,15 @@ function Main() {
       py="2rem"
       bgColor={wrapperBgColor}
       borderRadius="md"
-      overflowX='hidden'
+      overflowX="hidden"
     >
-      <RaceLine timer={timer} wpm={wpm} start={start} index={index} textLength = {textArr.length-1}/>
+      <RaceLine
+        timer={timer}
+        wpm={wpm}
+        start={start}
+        index={index}
+        textLength={textArr.length - 1}
+      />
       {start !== -1 && (
         <Box
           borderWidth="thin"
@@ -115,18 +131,66 @@ function Main() {
           bgColor={backgroundColor}
           fontFamily="monospace"
         >
-          <Box mb="2rem" lineHeight="1.7rem" fontSize="20px">
-          <Text display='inline' color='#99cc00'>{text.slice(0, length)}</Text>
-            <Text display='inline' textDecoration='underline' color='#99cc00'>{curString.slice(0, pointer)}</Text>
-            <Text display='inline' color='black' bgColor='red.300' textDecoration='underline'>{curString.slice(pointer,input.length >= curString.length ? input.length-k-1 : input.length-k
-              )}</Text>
-            <Text display='inline' color='black' bgColor='red.300'>{curString.slice(input.length >= curString.length ? input.length-k-1: input.length-k,input.length >= curString.length? input.length-k : input.length-k
-              )}</Text>
-            <Text display="inline" textDecoration="underline" color={textColor}>{curString.slice(input.length, curString.length - 1)}</Text>
-            <Text display='inline'>{curString.slice(curString.length - 1, curString.length)}</Text>
-            <Text display='inline' color='black' bgColor='red.300'>{text.slice(length+curString.length, length+curString.length+k)}</Text>
-            <Text display="inline" color={textColor}>{text.slice(length + curString.length + k, text.length)}</Text>
-          </Box>
+          {text.length === 4 ? (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          ) : (
+            <Box mb="2rem" lineHeight="1.7rem" fontSize="20px">
+              <Text Text display="inline" color="#99cc00">
+                {text.slice(0, length)}
+              </Text>
+              <Text display="inline" textDecoration="underline" color="#99cc00">
+                {curString.slice(0, pointer)}
+              </Text>
+              <Text
+                display="inline"
+                color="black"
+                bgColor="red.300"
+                textDecoration="underline"
+              >
+                {curString.slice(
+                  pointer,
+                  input.length >= curString.length
+                    ? input.length - k - 1
+                    : input.length - k
+                )}
+              </Text>
+              <Text display="inline" color="black" bgColor="red.300">
+                {curString.slice(
+                  input.length >= curString.length
+                    ? input.length - k - 1
+                    : input.length - k,
+                  input.length >= curString.length
+                    ? input.length - k
+                    : input.length - k
+                )}
+              </Text>
+              <Text
+                display="inline"
+                textDecoration="underline"
+                color={textColor}
+              >
+                {curString.slice(input.length, curString.length - 1)}
+              </Text>
+              <Text display="inline">
+                {curString.slice(curString.length - 1, curString.length)}
+              </Text>
+              <Text display="inline" color="black" bgColor="red.300">
+                {text.slice(
+                  length + curString.length,
+                  length + curString.length + k
+                )}
+              </Text>
+              <Text display="inline" color={textColor}>
+                {text.slice(length + curString.length + k, text.length)}
+              </Text>
+            </Box>
+          )}
           <Input
             variant="outline"
             autoFocus="autoFocus"
@@ -150,7 +214,9 @@ function Main() {
         </Box>
       )}
       <Flex mb="1rem" justifyContent="flex-end">
-        <Button colorScheme="green">New Race</Button>
+        <Button colorScheme="green">
+          <a href="/">New race</a>
+        </Button>
       </Flex>
       {start === -1 && (
         <Results stopwatch={stopwatch} wpm={wpm} accuracy={accuracy} />
