@@ -15,7 +15,7 @@ import RaceLine from "./RaceLine";
 import Results from "./Results";
 
 function Main() {
-  const [data, setData] = useState(["a", "b", "c", "d"]);
+  const [data, setData] = useState(["", "", "", ""]);
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/data").then((response) => {
@@ -46,8 +46,8 @@ function Main() {
     [timerInterval, setTimerInterval] = useState(null);
 
   const startTimer = () =>
-      setTimerInterval(setInterval(() => setTimeElapsed((p) => p - 1), 1000)),
-    stopTimer = () => clearInterval(timerInterval);
+    setTimerInterval(setInterval(() => setTimeElapsed((p) => p - 1), 1000));
+  const stopTimer = () => clearInterval(timerInterval);
 
   useEffect(() => {
     const t = 180 - timeElapsed;
@@ -73,35 +73,34 @@ function Main() {
       </span>
     );
 
-  if (pointer + 1 === input.length) {
-    const a = text[curIndex],
-      b = input.slice(-1);
+  if (pointer + 1 == input.length) {
     if (
-      a === b &&
-      greenList.indexOf(curIndex) + redList.indexOf(curIndex) === -2
+      text[curIndex] == input.slice(-1) &&
+      greenList.indexOf(curIndex) + redList.indexOf(curIndex) == -2
     )
       setGreenList([...greenList, curIndex]);
-    else if (greenList.indexOf(curIndex) + redList.indexOf(curIndex) === -2)
+    else if (greenList.indexOf(curIndex) + redList.indexOf(curIndex) == -2)
       setRedList([...redList, curIndex]);
   }
 
-  if (input.slice(-1) === curString[pointer] && input.length === pointer + 1) {
-    setPointer((prev) => prev + 1);
-    if (index === textArr.length - 2 && pointer === curString.length - 2) {
+  if (input.slice(-1) == curString[pointer] && input.length == pointer + 1) {
+    setPointer((p) => p + 1);
+    if (index == textArr.length - 2 && pointer == curString.length - 2) {
       setInput("");
-      setLength((prev) => prev + curString.length);
-      setIndex((prev) => prev + 1);
+      setLength((p) => p + curString.length);
+      setIndex((p) => p + 1);
       setStart(-1);
       return stopTimer();
     }
-    if (input.slice(-1) === " ") {
+    if (input.slice(-1) == " ") {
       setInput("");
       setPointer(0);
-      setLength((prev) => prev + curString.length);
-      setIndex((prev) => prev + 1);
+      setLength((p) => p + curString.length);
+      setIndex((p) => p + 1);
     }
-  } else if (input.length < pointer) setPointer(input.length);
-
+  } else if (input.length < pointer) {
+    setPointer(input.length);
+  }
   return (
     <Box
       borderWidth="thin"
@@ -131,7 +130,7 @@ function Main() {
           bgColor={backgroundColor}
           fontFamily="monospace"
         >
-          {text.length === 4 ? (
+          {text.length == 4 ? (
             <Spinner
               thickness="4px"
               speed="0.65s"
@@ -207,7 +206,7 @@ function Main() {
                 setStart(true);
                 startTimer();
               }
-              if (start === -1) return;
+              if (start == -1) return;
               setInput(i.target.value);
             }}
           />
@@ -219,7 +218,7 @@ function Main() {
         </a>
       </Flex>
 
-      {start === -1 && (
+      {start == -1 && (
         <Results stopwatch={stopwatch} wpm={wpm} accuracy={accuracy} />
       )}
     </Box>

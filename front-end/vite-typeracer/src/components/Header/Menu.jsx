@@ -17,7 +17,7 @@ import { IconUser, IconCar, IconKeyboard, IconFlame } from "@tabler/icons";
 
 function MenuChakra() {
   const background = useColorModeValue("white", "#262729");
-  const onHover = useColorModeValue("gray.200", "blackAlpha.400");
+  const onHover = useColorModeValue("gray.200", "blackAlpha.500");
   return (
     <Menu>
       <MenuButton as={IconButton} icon={<HamburgerIcon />} variant="ghost" />
@@ -25,38 +25,19 @@ function MenuChakra() {
         <MenuItem
           bgColor={background}
           _hover={{ bgColor: onHover }}
-          icon={<IconUser />}
           fontWeight="bold"
         >
           Profile
         </MenuItem>
-        <MenuItem
-          bgColor={background}
-          _hover={{ bgColor: onHover }}
-          icon={<IconKeyboard />}
-        >
+        <MenuItem bgColor={background} _hover={{ bgColor: onHover }}>
           Practice
         </MenuItem>
-        <MenuItem
-          bgColor={background}
-          _hover={{ bgColor: onHover }}
-          icon={<IconCar />}
-        >
+        <MenuItem bgColor={background} _hover={{ bgColor: onHover }}>
           Multiplayer
         </MenuItem>
-        <MenuItem
-          bgColor={background}
-          _hover={{ bgColor: onHover }}
-          icon={<IconFlame />}
-          mb=".5rem"
-        >
+        <MenuItem bgColor={background} _hover={{ bgColor: onHover }}>
           High Scores
         </MenuItem>
-        <Box px=".5rem">
-          <Button variant="solid" w="full" colorScheme="red">
-            Log out
-          </Button>
-        </Box>
       </MenuList>
     </Menu>
   );
