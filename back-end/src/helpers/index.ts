@@ -9,3 +9,7 @@ export const authentication = (salt: string, password: string) => {
     .update(SECRET)
     .digest("hex");
 };
+
+export const getRandom = (min: number, max:number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
