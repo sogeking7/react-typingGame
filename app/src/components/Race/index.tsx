@@ -8,32 +8,40 @@ import { RaceLine } from "./RaceLine";
 import { Results } from "./Results";
 
 export const Race = (): React.ReactNode => {
-  const [data, setData] = useState(["", "", "", ""]);
+  const [data, setData] = useState<null | {
+    id: number;
+    title: string;
+    author: string;
+    text: string;
+  }>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/race/random").then((response) => {
-      {
-        setData(response.data);
-      }
+    axios.get("http://localhost:3000/races/random").then(({ data }) => {
+      setData(data);
     });
   }, []);
 
-  const text = data[2] + " ";
+  const text = data?.text + " ";
   const textArr = text.split(" ");
+
+  const [input, setInput] = useState("");
 
   const [wpm, setWpm] = useState(0);
   const [start, setStart] = useState<number | null>(null); // not started = 0, started = 1, finished = -1
   const [index, setIndex] = useState(0);
-  const [input, setInput] = useState("");
   const [length, setLength] = useState(0);
   const [pointer, setPointer] = useState(0);
-  const [redList, setRedList] = useState([]);
-  const [greenList, setGreenList] = useState([]);
+  const [redList, setRedList] = useState<number[]>([]);
+  const [greenList, setGreenList] = useState<number[]>([]);
   const [timeElapsed, setTimeElapsed] = useState(180);
-  const [timerInterval, setTimerInterval] = useState(null);
+  const [timerInterval, setTimerInterval] = useState<any>(null);
 
   const startTimer = () =>
-    setTimerInterval(setInterval(() => setTimeElapsed((p) => p - 1), 1000));
+    setTimerInterval(
+      setInterval(() => {
+        return setTimeElapsed((p) => p - 1);
+      }, 1000)
+    );
   const stopTimer = () => clearInterval(timerInterval);
 
   useEffect(() => {
@@ -61,10 +69,11 @@ export const Race = (): React.ReactNode => {
     if (
       text[curIndex] == input.slice(-1) &&
       greenList.indexOf(curIndex) + redList.indexOf(curIndex) == -2
-    )
+    ) {
       setGreenList([...greenList, curIndex]);
-    else if (greenList.indexOf(curIndex) + redList.indexOf(curIndex) == -2)
+    } else if (greenList.indexOf(curIndex) + redList.indexOf(curIndex) == -2) {
       setRedList([...redList, curIndex]);
+    }
   }
 
   if (input.slice(-1) == curString[pointer] && input.length == pointer + 1) {
@@ -74,7 +83,7 @@ export const Race = (): React.ReactNode => {
       setLength((p) => p + curString.length);
       setIndex((p) => p + 1);
       setStart(-1);
-      return stopTimer();
+      stopTimer();
     }
     if (input.slice(-1) == " ") {
       setInput("");
@@ -85,8 +94,9 @@ export const Race = (): React.ReactNode => {
   } else if (input.length < pointer) {
     setPointer(input.length);
   }
+
   return (
-    <div className="border max-w-[900px] mx-auto px-4 relative overflow-hidden py-8 bg-white rounded-md overflow-x-hidden">
+    <div className="border max-w-3xl mx-auto px-4 relative overflow-hidden py-8 bg-white rounded-md overflow-x-hidden">
       <RaceLine
         timer={timer}
         wpm={wpm}
@@ -140,8 +150,9 @@ export const Race = (): React.ReactNode => {
             </div>
           )}
           <input
+            value={input}
             className={cn(
-              "outline mb-4 text-[20px] px-[0.2rem]",
+              "w-full outline mb-4 text-[20px] px-[0.2rem]",
               input.length > pointer ? "bg-red-300" : "bg-white",
               input.length > pointer ? "text-black" : "text-gray-300"
             )}
@@ -159,7 +170,7 @@ export const Race = (): React.ReactNode => {
       )}
       <div className="flex mb-4 justify-end">
         <a href="/">
-          <Button className="bg-green-500">New race</Button>
+          <Button>New race</Button>
         </a>
       </div>
 

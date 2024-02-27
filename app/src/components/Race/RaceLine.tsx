@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import useMeasure from "react-use-measure";
-import { cn } from "@/lib/utils";
 
 interface Props {
   timer: string;
@@ -10,26 +9,28 @@ interface Props {
   textLength: number;
 }
 
-export const RaceLine = (props: Props) => {
-  const [car, setCar] = useState(0),
-    [ref, bounds] = useMeasure();
+export const RaceLine = ({ index, timer, wpm, start, textLength }: Props) => {
+  const [car, setCar] = useState(0);
+  const [ref, bounds] = useMeasure();
 
   useEffect(() => {
-    setCar((props.index * (bounds.width - 160 + 12)) / props.textLength);
-  }, [bounds, props.index]);
+    const position = Number(
+      ((index * (bounds.width - 160 + 12)) / textLength).toFixed(2)
+    );
+    setCar(position);
+  }, [bounds, index]);
 
   return (
-    <div className="max-w-lg m-[0_auto_1rem_auto] overflow-x-hidden">
+    <div className="w-full m-[0_auto_1rem_auto] overflow-x-hidden">
       <div className="mb-[3rem] text-end font-bold">
-        {props.start !== -1 ? props.timer : <pre> </pre>}
+        {start !== -1 ? timer : <pre> </pre>}
       </div>
       <div className="flex relative">
-        {" "}
         <div
-          className={cn(
-            "flex bottom-[5px] absolute gap-[.2rem] h-[45px] w-[160px]",
-            `left-[${car}px]`
-          )}
+          style={{
+            left: car + "px",
+          }}
+          className="flex bottom-[5px] absolute gap-[.2rem] h-[45px] w-[160px]"
         >
           <div className="text-sm text-end font-bold flex justify-center flex-col">
             <span>sogeking7</span>
@@ -41,10 +42,10 @@ export const RaceLine = (props: Props) => {
         </div>
         <div
           ref={ref}
-          className="w-full border-b-1 border-dashed bottom-orange-500 overflow-x-hidden mr-4"
+          className="w-full border-b border-dashed border-orange-500 overflow-x-hidden mr-4"
         ></div>
         <div className="w-[85px] overflow-hidden font-bold text-start">
-          {props.wpm} wpm
+          {wpm} wpm
         </div>
       </div>
     </div>
