@@ -18,7 +18,7 @@ function Main() {
   const [data, setData] = useState(["", "", "", ""]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/data").then((response) => {
+    axios.get("http://localhost:3000/api/race/random").then((response) => {
       {
         setData(response.data);
       }
