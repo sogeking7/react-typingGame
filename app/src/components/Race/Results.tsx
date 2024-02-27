@@ -8,26 +8,24 @@ type Props = {
 
 export const Results = (props: Props) => {
   return (
-    <div className="font-mono rounded-xl border bg-gray-300">
-      <h1 className="text-[20px] p-[.5rem_1rem] rounded-xl bg-gray-300">
-        Race Results
-      </h1>
-      <div className="flex p-4">
+    <div className=" rounded-xl p-5 border bg-[#f6fbff] border-gray-300">
+      <h1 className="text-[20px] font-semibold">Race Results 🚩</h1>
+      <div className="flex mt-4">
         <ul className="flex flex-col gap-3 w-[200px]">
-          <li className="flex items-center">
-            <IconKeyboard />
+          <li className="flex items-center gap-2">
+            <IconKeyboard className="text-[#17B569]" />
             <p className="inline">Your speed:</p>
           </li>
-          <li className="flex items-center">
-            <IconClockHour9 />
+          <li className="flex items-center gap-2">
+            <IconClockHour9 className="text-[#17B569]" />
             <p className="inline">Time:</p>
           </li>
-          <li className="flex items-center">
-            <IconCheck />
+          <li className="flex items-center gap-2">
+            <IconCheck className="text-[#17B569]" />
             <p className="inline">Accuracy:</p>
           </li>
         </ul>
-        <ul className="flex flex-col gap-5 w-[200px] font-bold">
+        <ul className="flex flex-col gap-3 w-[200px] font-bold">
           <li>{props.wpm} wpm</li>
           <li>{props.stopwatch}</li>
           <li>{props.accuracy}%</li>

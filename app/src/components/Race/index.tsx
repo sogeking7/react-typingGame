@@ -8,6 +8,7 @@ import { RaceLine } from "./RaceLine";
 import { Results } from "./Results";
 
 export const Race = (): React.ReactNode => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<null | {
     id: number;
     title: string;
@@ -16,9 +17,11 @@ export const Race = (): React.ReactNode => {
   }>(null);
 
   useEffect(() => {
+    setLoading(true);
     axios.get("http://localhost:3000/races/random").then(({ data }) => {
       setData(data);
     });
+    setLoading(false);
   }, []);
 
   const text = data?.text + " ";
@@ -95,8 +98,12 @@ export const Race = (): React.ReactNode => {
     setPointer(input.length);
   }
 
+  if (loading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
   return (
-    <div className="border max-w-3xl mx-auto px-4 relative overflow-hidden py-8 bg-white rounded-md overflow-x-hidden">
+    <div className="border px-6 relative overflow-hidden py-8  rounded-xl overflow-x-hidden">
       <RaceLine
         timer={timer}
         wpm={wpm}
@@ -105,7 +112,7 @@ export const Race = (): React.ReactNode => {
         textLength={textArr.length - 1}
       />
       {start !== -1 && (
-        <div className="border p-4 mb-4 rounded-xl font-mono">
+        <div className="border bg-[#f6fbff] border-gray-300 p-4 mb-4 rounded-xl font-mono">
           {text.length == 4 ? (
             <div> Loading...</div>
           ) : (
@@ -154,7 +161,7 @@ export const Race = (): React.ReactNode => {
             className={cn(
               "w-full outline mb-4 text-[20px] px-[0.2rem]",
               input.length > pointer ? "bg-red-300" : "bg-white",
-              input.length > pointer ? "text-black" : "text-gray-300"
+              input.length > pointer ? "text-black" : "text-gray-800"
             )}
             placeholder="Type the above text"
             onChange={(i) => {

@@ -1,3 +1,4 @@
+import { useUserStore } from "@/stores/user";
 import { useState, useEffect } from "react";
 import useMeasure from "react-use-measure";
 
@@ -12,6 +13,8 @@ interface Props {
 export const RaceLine = ({ index, timer, wpm, start, textLength }: Props) => {
   const [car, setCar] = useState(0);
   const [ref, bounds] = useMeasure();
+
+  const { user } = useUserStore();
 
   useEffect(() => {
     const position = Number(
@@ -33,7 +36,7 @@ export const RaceLine = ({ index, timer, wpm, start, textLength }: Props) => {
           className="flex bottom-[5px] absolute gap-[.2rem] h-[45px] w-[160px]"
         >
           <div className="text-sm text-end font-bold flex justify-center flex-col">
-            <span>sogeking7</span>
+            <span>{user ? user.username : "Guest"}</span>
             <span>(you)</span>
           </div>
           <div className="flex items-end">
