@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix",
-    "dev": "nodemon ./src/server.ts",
-    "vercel-build": "echo Done running vercel-build."
+    "build": "tsc",
+    "start": "node ./dist/application.js"
   },
   "pre-commit": [
     "ts.check",
