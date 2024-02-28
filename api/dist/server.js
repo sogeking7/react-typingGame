@@ -46,4 +46,5 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 connectDB();
 app.use("/", (0, router_1.default)());
-//# sourceMappingURL=index.js.map
+exports.default = app;
+//# sourceMappingURL=server.js.map

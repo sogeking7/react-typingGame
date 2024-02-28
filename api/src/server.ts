@@ -29,16 +29,20 @@ server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.DATABASE_URL);
-    console.log(`MongoDB connected to ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`MongoDB connection error: ${error.message}`);
-    process.exit(1);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//     const conn = await mongoose.connect(process.env.DATABASE_URL);
+//     console.log(`MongoDB connected to ${conn.connection.host}`);
+//   } catch (error) {
+//     console.error(`MongoDB connection error: ${error.message}`);
+//     process.exit(1);
+//   }
+// };
 
-connectDB();
+// connectDB();
 
-app.use("/", router());
+// app.use("/", router());
+
+app.use('/api', (req, res) => res.send('Hello World'))
+
+export default app;
