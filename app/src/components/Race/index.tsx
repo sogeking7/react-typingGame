@@ -6,8 +6,14 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { RaceLine } from "./RaceLine";
 import { Results } from "./Results";
+import { useUserStore } from "@/stores/user";
+
+const getRandomRace = async () =>
+  await axios.get("http://localhost:3000/races/random");
 
 export const Race = (): React.ReactNode => {
+  const { user } = useUserStore();
+
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<null | {
     id: number;
@@ -18,7 +24,7 @@ export const Race = (): React.ReactNode => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:3000/races/random").then(({ data }) => {
+    getRandomRace().then(({ data }) => {
       setData(data);
     });
     setLoading(false);
@@ -46,6 +52,45 @@ export const Race = (): React.ReactNode => {
       }, 1000)
     );
   const stopTimer = () => clearInterval(timerInterval);
+
+  const reset = () => {
+    stopTimer();
+    setWpm(0);
+    setStart(null);
+    setIndex(0);
+    setLength(0);
+    setPointer(0);
+    setRedList([]);
+    setGreenList([]);
+    setTimeElapsed(180);
+    setInput("");
+  };
+
+  const startNewRace = () => {
+    reset();
+    setLoading(true);
+    getRandomRace().then(({ data }) => {
+      setData(data);
+    });
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (!user) return;
+    if (start === -1) {
+      const values: any = {
+        wpm: wpm,
+        accuracy: accuracy,
+        userId: user?._id || "",
+      };
+      const addAttempt = async (values) =>
+        await axios.post("http://localhost:3000/attempt", values);
+
+      addAttempt(values).then(({ data }) => {
+        console.log(data);
+      });
+    }
+  }, [start]);
 
   useEffect(() => {
     const t = 180 - timeElapsed;
@@ -176,9 +221,7 @@ export const Race = (): React.ReactNode => {
         </div>
       )}
       <div className="flex mb-4 justify-end">
-        <a href="/">
-          <Button>New race</Button>
-        </a>
+        <Button onClick={startNewRace}>New race</Button>
       </div>
 
       {start == -1 && (

@@ -29,10 +29,16 @@ server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
 
-mongoose.Promise = Promise;
-mongoose.connect(process.env.DATABASE_URL);
-mongoose.connection.on("error", (error: Error) => {
-  console.log(error);
-});
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DATABASE_URL);
+    console.log(`MongoDB connected to ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`MongoDB connection error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+connectDB();
 
 app.use("/", router());
