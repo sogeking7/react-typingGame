@@ -15,6 +15,7 @@ interface Attempt {
   username: string;
   wpm: number;
   accuracy: number;
+  date: string;
 }
 
 export const Attempts = () => {
@@ -25,7 +26,7 @@ export const Attempts = () => {
   useEffect(() => {
     setLoading(true);
     const getAttempts = async () =>
-      await axios.get(`${process.env.NEXT_PUBLIC_API}/attempt/${user._id}`);
+      await axios.get(`${process.env.NEXT_PUBLIC_API}/attempt/${user!._id}`);
 
     getAttempts().then(({ data }) => {
       setAttempts(data.races);

@@ -83,7 +83,7 @@ export const Race = (): React.ReactNode => {
         accuracy: accuracy,
         userId: user?._id || "",
       };
-      const addAttempt = async (values) =>
+      const addAttempt = async (values: any) =>
         await axios.post(`${process.env.NEXT_PUBLIC_API}/attempt`, values);
 
       addAttempt(values).then(({ data }) => {

@@ -14,8 +14,9 @@ import {
 
 interface Attempt {
   username: string;
-  wpm: number;
   accuracy: number;
+  maxWpm: string;
+  email: string;
 }
 export default function Home() {
   const [attempts, setAttempts] = useState<Array<Attempt>>([]);
