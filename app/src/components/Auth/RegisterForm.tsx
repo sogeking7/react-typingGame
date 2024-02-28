@@ -27,7 +27,7 @@ export const RegisterForm = ({ setOpen }: any) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (values) => {
     await axios
-      .post("http://localhost:3000/auth/register", values)
+      .post(`${process.env.NEXT_PUBLIC_API}/auth/register`, values)
       .then(({ data }) => {
         initUser(data);
         reset();

@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     const getAttempts = async () =>
-      await axios.get("http://localhost:3000/attempt");
+      await axios.get(`${process.env.NEXT_PUBLIC_API}/attempt`);
 
     getAttempts().then(({ data }) => {
       setAttempts(data);

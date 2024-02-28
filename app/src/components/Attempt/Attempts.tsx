@@ -25,7 +25,7 @@ export const Attempts = () => {
   useEffect(() => {
     setLoading(true);
     const getAttempts = async () =>
-      await axios.get(`http://localhost:3000/attempt/${user._id}`);
+      await axios.get(`${process.env.NEXT_PUBLIC_API}/attempt/${user._id}`);
 
     getAttempts().then(({ data }) => {
       setAttempts(data.races);

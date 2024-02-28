@@ -9,7 +9,7 @@ import { Results } from "./Results";
 import { useUserStore } from "@/stores/user";
 
 const getRandomRace = async () =>
-  await axios.get("http://localhost:3000/races/random");
+  await axios.get(`${process.env.NEXT_PUBLIC_API}/races/random`);
 
 export const Race = (): React.ReactNode => {
   const { user } = useUserStore();
@@ -84,7 +84,7 @@ export const Race = (): React.ReactNode => {
         userId: user?._id || "",
       };
       const addAttempt = async (values) =>
-        await axios.post("http://localhost:3000/attempt", values);
+        await axios.post(`${process.env.NEXT_PUBLIC_API}/attempt`, values);
 
       addAttempt(values).then(({ data }) => {
         console.log(data);

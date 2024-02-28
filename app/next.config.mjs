@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+// require("dotenv").config
+
+const nextConfig = {
+  // env: {
+  //   API: process.env.NEXT_PUBLIC_API_KEY,
+  // },
+};
 
 export default nextConfig;
