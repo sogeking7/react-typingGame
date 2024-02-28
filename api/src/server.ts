@@ -29,9 +29,10 @@ server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}/`);
 });
 
+const DATABASE_URL = "mongodb+srv://sogeking7:dragonHero1f@test.iaqxac2.mongodb.net/?retryWrites=true&w=majority&appName=test"
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.DATABASE_URL);
+    const conn = await mongoose.connect(DATABASE_URL);
     console.log(`MongoDB connected to ${conn.connection.host}`);
   } catch (error) {
     console.error(`MongoDB connection error: ${error.message}`);
