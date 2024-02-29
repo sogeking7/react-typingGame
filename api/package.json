@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/application.js"
+    "start": "node ./dist/server.js"
   },
   "pre-commit": [
     "ts.check",
